@@ -1,0 +1,13 @@
+1) 
+hdfs dfs -cat /user/hadoop/output/total_records7/part-r-00000
+
+2)
+hdfs dfs -cat /user/hadoop/output/branch_type_frequency7/part-r-00000
+
+3)
+hdfs dfs -cat /user/hadoop/output/branch_type_taken_relationship7/part-r-00000
+
+4)
+hdfs dfs -cat /user/hadoop/output/branch_type_taken_proportion7/part-r-00000
+
+5)

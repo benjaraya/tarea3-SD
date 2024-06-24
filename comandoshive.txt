@@ -1,0 +1,83 @@
+SELECT branch_type, COUNT(*) as frecuencia
+    > from charlie_data3
+    > GROUP BY branch_type;
+
+
+
+---
+
+
+-- Analizar la relación entre tipos de branch y el valor de "taken"
+SELECT branch_type, taken, COUNT(*) AS cantidad
+FROM charlie_data3
+GROUP BY branch_type, taken;
+
+
+
+SELECT *
+FROM charlie_data3
+WHERE taken = 0
+  AND branch_type != 'conditional_jump'
+LIMIT 1;
+
+
+Calcular la proporci ́on de registros con ”taken” igual a 1 para cada tipo de branch.
+
+SELECT branch_type, 
+       SUM(CASE WHEN taken = 1 THEN 1 ELSE 0 END) AS count_taken_1,
+       COUNT(*) AS total_records,
+       AVG(CASE WHEN taken = 1 THEN 1.0 ELSE 0.0 END) AS proportion_taken_1
+FROM charlie_data3
+GROUP BY branch_type;
+
+
+1)
+SELECT * FROM total_records;
+
+2)
+SELECT * FROM branch_type_frequency;
+
+3)
+SELECT * FROM branch_type_taken_relationship
+
+
+4)
+SELECT * FROM branch_type_taken_proportion;
+
+Creación de tablas
+DROP TABLE IF EXISTS total_records_pig;
+CREATE TABLE total_records_pig (
+    total_count STRING
+);
+DROP TABLE IF EXISTS branch_type_frequency_pig;
+CREATE TABLE branch_type_frequency_pig (
+    branch_type STRING,
+    frequency STRING
+);
+DROP TABLE IF EXISTS branch_type_taken_relationship_pig;
+CREATE TABLE branch_type_taken_relationship_pig (
+    branch_type STRING,
+    taken STRING,
+    count STRING
+);
+DROP TABLE IF EXISTS branch_type_taken_proportion_pig;
+CREATE TABLE branch_type_taken_proportion_pig (
+    branch_type STRING,
+    count_taken_1 STRING,
+    total_records STRING,
+    proportion_taken_1 STRING
+);
+
+
+Para ver tablas Pig:
+select * from total_records_pig;
+
+select * from branch_type_frequency_pig;
+
+select * from branch_type_taken_relationship_pig;
+
+select * from branch_type_taken_proportion_pig;
+
+
+
+
